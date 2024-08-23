@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدولك الأسبوعي</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="table-container">
+        <table id="weekly-schedule">
+            <thead>
+                <tr>
+                    <th>اليوم</th>
+                    <th>9:00 - 10:00</th>
+                    <th>10:30 - 12:30</th>
+                    <th>1:00 - 2:00</th>
+                    <th>2:30 - 4:30</th>
+                    <th>5:00 - 6:30</th>
+                    <th>7:00 - 10:00</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>السبت</td>
+                    <td class="clickable" data-id="sat-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sat-1030">دراسة HTML <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sat-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sat-1430">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sat-17">لعب كرة السلة <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sat-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
+                </tr>
+                <tr>
+                    <td>الأحد</td>
+                    <td class="clickable" data-id="sun-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sun-1030">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sun-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sun-1430">دراسة HTML <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sun-17">لعب كرة السلة <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="sun-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
+                </tr>
+                <tr>
+                    <td>الإثنين</td>
+                    <td class="clickable" data-id="mon-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="mon-1030">دراسة HTML <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="mon-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="mon-1430">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="mon-17">راحة/أنشطة أخرى <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="mon-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
+                </tr>
+                <tr>
+                    <td>الثلاثاء</td>
+                    <td class="clickable" data-id="tue-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="tue-1030">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="tue-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="tue-1430">دراسة HTML <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="tue-17">لعب كرة السلة <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="tue-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
+                </tr>
+                <tr>
+                    <td>الأربعاء</td>
+                    <td class="clickable" data-id="wed-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="wed-1030">دراسة HTML <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="wed-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="wed-1430">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="wed-17">راحة/أنشطة أخرى <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="wed-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
+                </tr>
+                <tr>
+                    <td>الخميس</td>
+                    <td class="clickable" data-id="thu-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="thu-1030">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="thu-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="thu-1430">دراسة HTML <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="thu-17">لعب كرة السلة <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="thu-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
+                </tr>
+                <tr>
+                    <td>الجمعة</td>
+                    <td class="clickable" data-id="fri-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="fri-1030">دراسة HTML <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="fri-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="fri-1430">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="fri-17">راحة/أنشطة أخرى <button class="check-btn">تحقق</button></td>
+                    <td class="clickable" data-id="fri-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

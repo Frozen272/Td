@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 16px;
+}
+
+th, td {
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.clickable {
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.clickable:hover {
+    background-color: #f0f0f0;
+}
+
+.clicked {
+    background-color: #4CAF50;
+    color: white;
+    position: relative;
+}
+
+.clicked::after {
+    content: "✔";
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.check-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.check-btn:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 10px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody, tr {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        padding-left: 50%;
+        box-sizing: border-box;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 10px;
+        font-weight: bold;
+        background: #f0f0f0;
+    }
+}
