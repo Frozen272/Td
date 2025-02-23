@@ -1,92 +1,411 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جدولك الأسبوعي</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Hacker Theme Page</title>
+    <style>
+        /* General Styles */
+        body {
+            background-color: black;
+            color: lime;
+            font-family: 'Orbitron', sans-serif; /* خط مناسب لستايل الهاكر */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .terminal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.1), rgba(0, 255, 0, 0.1) 1px, transparent 1px, transparent 2px);
+            animation: glitch 1s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-top: 20%;
+        }
+        .file-icon {
+            width: 50px;
+            height: 50px;
+            margin: 20px auto;
+            display: block;
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        .button {
+            background-color: lime;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            animation: neonGlow 2s infinite;
+        }
+        @keyframes neonGlow {
+            0% { box-shadow: 0 0 5px lime, 0 0 10px lime, 0 0 20px lime; }
+            50% { box-shadow: 0 0 5px cyan, 0 0 10px cyan, 0 0 20px cyan; }
+            100% { box-shadow: 0 0 5px lime, 0 0 10px lime, 0 0 20px lime; }
+        }
+        .glitch-text-loading {
+            font-size: 2rem;
+            font-weight: bold;
+            position: relative;
+            animation: glitchTextLoading 1s infinite;
+        }
+        @keyframes glitchTextLoading {
+            0% { text-shadow: 2px 2px 0 red, -2px -2px 0 blue; }
+            25% { text-shadow: -2px 2px 0 blue, 2px -2px 0 red; }
+            50% { text-shadow: 2px -2px 0 lime, -2px 2px 0 cyan; }
+            75% { text-shadow: -2px -2px 0 cyan, 2px 2px 0 lime; }
+            100% { text-shadow: 2px 2px 0 red, -2px -2px 0 blue; }
+        }
+        .hacker-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: lime;
+            text-shadow: 0 0 5px lime, 0 0 10px lime, 0 0 20px lime;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, lime 10px, lime 20px);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: hackerText 2s infinite;
+        }
+        @keyframes hackerText {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+        .bubble {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out, colorChange 5s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes colorChange {
+            0% { background-color: lime; }
+            25% { background-color: cyan; }
+            50% { background-color: magenta; }
+            75% { background-color: yellow; }
+            100% { background-color: lime; }
+        }
+        .skull {
+            position: absolute;
+            font-size: 50px;
+            animation: skullAnimation 6s infinite;
+            pointer-events: none;
+            color: red;
+            text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red, 0 0 40px darkred, 0 0 80px darkred;
+        }
+        @keyframes skullAnimation {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        .game-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1000;
+            color: lime;
+            text-align: center;
+            padding-top: 20%;
+        }
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .controls button {
+            background-color: lime;
+            color: black;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 10px lime;
+        }
+        .controls button:active {
+            background-color: cyan;
+        }
+        .exit-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            animation: neonGlowRed 2s infinite;
+        }
+        @keyframes neonGlowRed {
+            0% { box-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red; }
+            50% { box-shadow: 0 0 5px darkred, 0 0 10px darkred, 0 0 20px darkred; }
+            100% { box-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red; }
+        }
+        .finger-trail {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            animation: trailFade 1s forwards, trailColorChange 0.5s infinite;
+        }
+        @keyframes trailFade {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(2); }
+        }
+        @keyframes trailColorChange {
+            0% { background-color: lime; }
+            25% { background-color: cyan; }
+            50% { background-color: magenta; }
+            75% { background-color: yellow; }
+            100% { background-color: lime; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"> <!-- خط Orbitron -->
 </head>
 <body>
-    <div class="table-container">
-        <table id="weekly-schedule">
-            <thead>
-                <tr>
-                    <th>اليوم</th>
-                    <th>9:00 - 10:00</th>
-                    <th>10:30 - 12:30</th>
-                    <th>1:00 - 2:00</th>
-                    <th>2:30 - 4:30</th>
-                    <th>5:00 - 6:30</th>
-                    <th>7:00 - 10:00</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>السبت</td>
-                    <td class="clickable" data-id="sat-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sat-1030">دراسة HTML <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sat-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sat-1430">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sat-17">لعب كرة السلة <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sat-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
-                </tr>
-                <tr>
-                    <td>الأحد</td>
-                    <td class="clickable" data-id="sun-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sun-1030">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sun-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sun-1430">دراسة HTML <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sun-17">لعب كرة السلة <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="sun-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
-                </tr>
-                <tr>
-                    <td>الإثنين</td>
-                    <td class="clickable" data-id="mon-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="mon-1030">دراسة HTML <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="mon-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="mon-1430">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="mon-17">راحة/أنشطة أخرى <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="mon-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
-                </tr>
-                <tr>
-                    <td>الثلاثاء</td>
-                    <td class="clickable" data-id="tue-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="tue-1030">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="tue-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="tue-1430">دراسة HTML <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="tue-17">لعب كرة السلة <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="tue-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
-                </tr>
-                <tr>
-                    <td>الأربعاء</td>
-                    <td class="clickable" data-id="wed-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="wed-1030">دراسة HTML <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="wed-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="wed-1430">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="wed-17">راحة/أنشطة أخرى <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="wed-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
-                </tr>
-                <tr>
-                    <td>الخميس</td>
-                    <td class="clickable" data-id="thu-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="thu-1030">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="thu-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="thu-1430">دراسة HTML <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="thu-17">لعب كرة السلة <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="thu-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
-                </tr>
-                <tr>
-                    <td>الجمعة</td>
-                    <td class="clickable" data-id="fri-9">رياضة العضلات <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="fri-1030">دراسة HTML <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="fri-13">استراحة وغداء <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="fri-1430">تعلم البرمجة على Godot <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="fri-17">راحة/أنشطة أخرى <button class="check-btn">تحقق</button></td>
-                    <td class="clickable" data-id="fri-19">اللعب مع الأصدقاء <button class="check-btn">تحقق</button></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="terminal"></div>
+    <div class="content">
+        <div id="loading" class="glitch-text-loading">جار التشفير...</div>
+        <div id="message" style="display:none;">
+            <div class="hacker-text">لقد تم الحصول وتشفير كل بيانات.</div>
+            <img src="file-icon.png" alt="File Icon" class="file-icon">
+            <div id="user-ip" class="hacker-text"></div>
+            <button class="button" onclick="restoreData()">استعادة البيانات</button>
+            <button class="button" onclick="startGame()">ابدأ اللعبة</button>
+        </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Game Container -->
+    <div class="game-container" id="game-container">
+        <div id="game-story" class="neon">
+            <p>قصة اللعبة: لقد سرق الهاكر بياناتك! عليك استعادتها عن طريق حل الألغاز والقفز عبر المنصات.</p>
+            <button class="button" onclick="startGameplay()">ابدأ اللعب</button>
+        </div>
+        <canvas id="game-canvas" width="800" height="600" style="display:none;"></canvas>
+        <div class="controls" id="game-controls" style="display:none;">
+            <button id="left-btn">⬅️</button>
+            <button id="jump-btn">🔼</button>
+            <button id="right-btn">➡️</button>
+        </div>
+        <button class="exit-button" onclick="exitGame()">خروج</button>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('user-ip').innerText = 'IP المستخدم: ' + data.ip;
+                });
+        }, 2000);
+
+        function restoreData() {
+            const message = "كم تريد لتعيد بياناتي";
+            const url = `https://wa.me/0614030795?text=${encodeURIComponent(message)}`;
+            window.location.href = url;
+        }
+
+        function startGame() {
+            document.getElementById('game-container').style.display = 'block';
+        }
+
+        function startGameplay() {
+            document.getElementById('game-story').style.display = 'none';
+            document.getElementById('game-canvas').style.display = 'block';
+            document.getElementById('game-controls').style.display = 'flex';
+            initGame();
+        }
+
+        function exitGame() {
+            document.getElementById('game-container').style.display = 'none';
+        }
+
+        // Bubbles Effect
+        setInterval(function() {
+            let bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.style.left = Math.random() * window.innerWidth + 'px';
+            bubble.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(bubble);
+            setTimeout(() => {
+                bubble.remove();
+            }, 5000);
+        }, 1000);
+
+        // Touch Interaction for Bubbles
+        document.addEventListener('touchstart', function(e) {
+            let bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.style.left = e.touches[0].pageX + 'px';
+            bubble.style.top = e.touches[0].pageY + 'px';
+            bubble.style.width = '40px';
+            bubble.style.height = '40px';
+            document.body.appendChild(bubble);
+            setTimeout(() => {
+                bubble.remove();
+            }, 1000);
+        });
+
+        // Finger Trail Effect
+        document.addEventListener('touchmove', function(e) {
+            let trail = document.createElement('div');
+            trail.className = 'finger-trail';
+            trail.style.left = e.touches[0].pageX + 'px';
+            trail.style.top = e.touches[0].pageY + 'px';
+            document.body.appendChild(trail);
+            setTimeout(() => {
+                trail.remove();
+            }, 1000);
+        });
+
+        // Skull Effect
+        setInterval(function() {
+            let skull = document.createElement('div');
+            skull.className = 'skull';
+            skull.innerText = '💀';
+            skull.style.left = Math.random() * window.innerWidth + 'px';
+            skull.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(skull);
+            setTimeout(() => {
+                skull.remove();
+            }, 6000);
+        }, 6000);
+
+        // Game Logic
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        let player, platforms, hacker, keys = {};
+
+        function initGame() {
+            player = { x: 50, y: 500, width: 40, height: 40, color: 'lime', velocityY: 0, grounded: false };
+            platforms = [
+                { x: 0, y: 550, width: 800, height: 50, color: 'gray' },
+                { x: 200, y: 400, width: 150, height: 20, color: 'gray' },
+                { x: 500, y: 300, width: 150, height: 20, color: 'gray' },
+                { x: 700, y: 200, width: 150, height: 20, color: 'gray' },
+                { x: 300, y: 100, width: 150, height: 20, color: 'gray' }
+            ];
+            hacker = { x: 700, y: 250, width: 40, height: 40, color: 'red', caught: false };
+
+            document.addEventListener('keydown', (e) => keys[e.code] = true);
+            document.addEventListener('keyup', (e) => keys[e.code] = false);
+
+            // Game Controls
+            const leftBtn = document.getElementById('left-btn');
+            const rightBtn = document.getElementById('right-btn');
+            const jumpBtn = document.getElementById('jump-btn');
+
+            leftBtn.addEventListener('touchstart', () => keys['ArrowLeft'] = true);
+            leftBtn.addEventListener('touchend', () => keys['ArrowLeft'] = false);
+
+            rightBtn.addEventListener('touchstart', () => keys['ArrowRight'] = true);
+            rightBtn.addEventListener('touchend', () => keys['ArrowRight'] = false);
+
+            jumpBtn.addEventListener('touchstart', () => {
+                if (player.grounded) {
+                    player.velocityY = -15;
+                    player.grounded = false;
+                }
+            });
+
+            gameLoop();
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw platforms
+            platforms.forEach(platform => {
+                ctx.fillStyle = platform.color;
+                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+            });
+
+            // Draw player
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+
+            // Draw hacker
+            if (!hacker.caught) {
+                ctx.fillStyle = hacker.color;
+                ctx.fillRect(hacker.x, hacker.y, hacker.width, hacker.height);
+            }
+
+            // Player movement
+            if (keys['ArrowLeft']) player.x -= 5;
+            if (keys['ArrowRight']) player.x += 5;
+            if (keys['Space'] && player.grounded) {
+                player.velocityY = -15;
+                player.grounded = false;
+            }
+
+            // Gravity
+            player.velocityY += 1;
+            player.y += player.velocityY;
+
+            // Collision with platforms
+            player.grounded = false;
+            platforms.forEach(platform => {
+                if (player.x < platform.x + platform.width &&
+                    player.x + player.width > platform.x &&
+                    player.y + player.height > platform.y &&
+                    player.y < platform.y + platform.height &&
+                    player.velocityY >= 0) {
+                    player.y = platform.y - player.height;
+                    player.velocityY = 0;
+                    player.grounded = true;
+                }
+            });
+
+            // Catch hacker
+            if (player.x < hacker.x + hacker.width &&
+                player.x + player.width > hacker.x &&
+                player.y + player.height > hacker.y &&
+                player.y < hacker.y + hacker.height) {
+                hacker.caught = true;
+                setTimeout(() => {
+                    alert("لقد أمسكت بالهاكر! بياناتك آمنة الآن.");
+                }, 1000);
+            }
+
+            if (!hacker.caught) requestAnimationFrame(gameLoop);
+        }
+    </script>
 </body>
 </html>
